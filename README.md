@@ -1,4 +1,4 @@
-##bind 配置dlz 支持
+## bind 配置dlz 支持
 
 ### bind编译安装,并支持Percona Server
 
@@ -15,7 +15,7 @@ make && make install
 echo "/opt/Percona-Server-5.7.17-11-Linux.x86_64.ssl101/lib" > /etc/ld.so.conf.d/mysql.conf
 ```
 
-##安装
+## 安装
 
 ```
 pip instatll -r requirements.txt
@@ -23,20 +23,20 @@ pip instatll -r requirements.txt
 修改默认配置bindmanager/config/app.cfg
 ```
 
-##数据库
+## 数据库
 
 ```
 导入bind.sql
 mysql < bind.sql
 ```
 
-##运行
+## 运行
 
 ```
 nohup python runserver.py &>>access_log 
 ```
 
-##登录
+## 登录
 
 ```
 默认登录用户名和密码

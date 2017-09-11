@@ -1,5 +1,7 @@
 #bind 配置dlz 支持
+
 ## bind编译安装,并支持Percona Server
+
 '''
 https://www.isc.org/bind-9-11-arm/
 yum -y install  gcc GeoIP GeoIP-update GeoIP-devel openssl-devel
@@ -12,22 +14,30 @@ sed -i '/MYSQL_LIBS=/s/=/=-L\/opt\/Percona-Server-5.7.17-11-Linux.x86_64.ssl101\
 make && make install
 echo "/opt/Percona-Server-5.7.17-11-Linux.x86_64.ssl101/lib" > /etc/ld.so.conf.d/mysql.conf
 '''
+
 #安装
+
 '''
 pip instatll -r requirements.txt
 
 修改默认配置bindmanager/config/app.cfg
 '''
+
 #数据库
+
 '''
 导入bind.sql
 mysql < bind.sql
 '''
+
 #运行
+
 '''
 nohup python runserver.py &>>access_log 
 '''
+
 #登录
+
 '''
 默认登录用户名和密码
 admin 0123456789

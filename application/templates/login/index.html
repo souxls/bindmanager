@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>bindmanager DNS管理系统 </title>
+
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/static/css/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="/static/css/animate.min.css" rel="stylesheet">
+    <link href="/static/css/init.min.css" rel="stylesheet">
+  </head>
+
+  <body class="login">
+      <a class="hiddenanchor" id="signin"></a>
+      <div class="login_wrapper">
+        <div class="animate login_form">
+          <section class="login_content">
+            <h1>登录</h1>
+            <p id="message" class="text-danger" type="hidden"></p>
+            <form  data-parsley-validate="validate">
+              <input id="pubkey" class="hidden" value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8QEybkn8CYcYYkUbVFLgtiHrVmnE1IRJm5hDdWbr9LAL6OogqlQ3YIZgUZWjHvHbeP9uU1koVrPYrAdV9Vm7eyoQM5wKv9mNpBb8NGXWyXL4dg3F5+3ZiVC9aTy7KOnBEHR9X2HMpq4K+mgXa55FibBp9e8nxoD9DMft3PUQLGQIDAQAB" type="hide">
+              <div>
+                <input id="username" name="username" type="text" class="form-control" placeholder="用户名/邮箱名/已验证手机号码"  data-parsley-required="true" data-parsley-length="[3, 30]" data-parsley-trigger="blur" data-parsley-length-message="请输入正确的账号名" data-parsley-required-message="账号不能为空"/>
+              </div>
+              <div>
+                <input id="password" name="password" type="password" class="form-control" placeholder="密码" data-parsley-required="true" data-parsley-minlength="5" data-parsley-trigger="blur" data-parsley-minlength-message="请输入正确的密码" data-parsley-requred-message="密码不能为空"/>
+              </div>
+              <div>
+                <button id="login" class="btn btn-primary btn validate submit"  type="submit" >登录</button>
+                <a href="Mailto:dengxiaoshan@pwrd.com?Subject='账号申请'" class="btn btn-default" >申请账号</a>
+                <a class="reset_pass" href="Mailto:dengxiaoshan@pwrd.com?Subject='密码重置'">忘记密码?</a>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jsencrypt.min.js"></script>
+    <script src="/static/js/parsley.js"></script>
+    <script src="/static/js/formvalidation.js"></script>
+  </body>
+</html>

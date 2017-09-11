@@ -1,0 +1,150 @@
+        {% extends "layout.html" %}
+        {%  block page_content %}
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>用户信息</h3>
+              </div>
+
+              <div class="title_right">
+              </div>
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                      <div class="">
+                        <div id="crop-avatar">
+                          <!-- Current avatar -->
+                          <h1>
+                          <span class="glyphicon glyphicon-user"></span>
+                          </h1>
+                        </div>
+                      </div>
+                     {% if current_user.is_authenticated %}
+                     <h3> {{ current_user.username }} </h4>
+
+                      <ul class="list-unstyled user_data">
+                        <li><i class="fa fa-map-marker user-profile-icon"></i>{{ current_user.last_login_ip }}
+                        </li>
+                      </ul>
+
+                      <a id="editprofile" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>编辑配置</a>
+                      <a id="chgepwd" href="/user/changepassword" class="btn btn-success"><i class="fa fa-key m-right-xs"></i>修改密码</a>
+                      <br />
+
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <div class="profile_title">
+                        <div class="col-md-12">
+                          <h2>用户基本信息</h2>
+                        </div>
+                      </div>
+                      <div class="x_panel">
+                        <div class="x_content">
+                          <form class="form-horizontal form-label-left" data-parsley-validate="validate">
+                            <div class="item form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 登录名: </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <span name="username" class="form-control-static col-md-7 col-xs-12"> {{ current_user.username }} </span>
+                              </div>
+                            </div> 
+                            <div class="item form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 真实姓名: </label>
+
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p class="form-control-static col-md-7 col-xs-12">{{ current_user.nickname }}</p>
+                                <input id="nickname" class="form-control col-md-7 col-xs-12 hidden"
+                                name="nickname" placeholder="用户名" value={{ current_user.nickname }} data-parsley-required="true" data-parsley-minlength="2" data-parsley-trigger="blur" data-parsley-minlength-message="请输入真实姓名" data-parsley-required-message="请输入真实姓名">
+                              </div>
+                            </div>
+                            <div class="item form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 邮箱: </label>
+
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <p class="form-control-static col-md-7 col-xs-12">{{ curr_email }}</p>
+                                <input id="email" class="form-control col-md-7 col-xs-12 hidden"
+                                name="email" placeholder="邮箱" value={{ curr_email }} data-parsley-required="true" data-parsley-type="email"  data-parsley-trigger="blur" data-parsley-error-message="请输入正确的邮箱名">
+                              </div>
+                            </div>
+                            <div class="item form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 手机号码: </label>
+
+                              <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                <p class="form-control-static col-md-7 col-xs-12">{{ curr_phone }}</p>
+                                <input id="phone" class="form-control col-md-7 col-xs-12 hidden"
+                                name="phone" placeholder="手机号码"  value={{ curr_phone }}  data-parsley-required="true" data-parsley-type="integer"  data-parsley-trigger="blur" data-parsley-length='[11,11]' data-parsley-error-message="请输入正确的手机号码">
+                              </div>
+                            </div>
+                            <div class="item form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 上次登录时间: </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                <span class="form-control-static col-md-7 col-xs-12">{{ current_user.last_login_date }}</span>
+                              </div>
+
+                            </div>
+                            <div class="item form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 上次登录IP: </label>
+
+                              <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                <span class="form-control-static col-md-7 col-xs-12">{{ current_user.last_login_ip }}</span>
+                              </div>
+                            </div>
+                            <div class="item form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 创建时间: </label>
+
+                              <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                <span class="form-control-static col-md-7 col-xs-12">{{ current_user.create_date }}</span>
+                              </div>
+                            </div>
+                            {% endif %}
+                            <div class="item form-group">
+                              <div class="col-md6 col-sm-6 col-xs-12">
+                                <p class="text-danger text-center">test</p>
+                              </div>
+                            </div>
+                            <div class="item form-group">
+                              <div class="col-3 col-sm-3 col-xs-12 col-md-offset-3">
+                                <button id="save" class="btn btn-primary hidden"/> 保存</button>
+                                <a id="cancel" class="btn btn-default hidden"/> 取消 </a>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+        {% endblock %}
+{% block js %}
+<script src="/static/js/parsley.js"></script>
+<script src="/static/js/jsencrypt.min.js"></script>
+<script src="/static/js/formvalidation.js"></script>
+<script>
+  $(function() {
+    $("#editprofile").on("click", function(){
+    $("form").children().children().children("p").addClass("hidden");
+    $("form").children().children().children("input").removeClass("hidden");
+    $("form").children().children().children(".btn").removeClass("hidden");
+    });
+    $("#cancel").on("click", function(){
+      $("form").children().children().children("p").removeClass("hidden");
+      $("form").children().children().children("input").addClass("hidden");
+      $("form").children().children().children(".btn").addClass("hidden");
+   });
+  });
+</script>
+{% endblock %}

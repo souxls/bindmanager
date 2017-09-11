@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block page_content %}
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>域名查询</h3>
+              </div>
+            </div>
+            <div class="row">
+             <div class="clearfix"></div>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_content">
+                   <form>
+                    <div class="input-group col-md-6 col-sm-8 col-xs-8 col-md-offset-3">
+                      <input id="searchtext" name="wd" type="search" class="form-control">
+                      <span class="input-group-btn">
+                        <button id="search" class="btn btn-primary submit" type="button">查询</button>
+                       </span>
+                    </div>
+                    </form>
+                    <div class="clearfix"></div>
+                    {% if records %}
+                    <div class="table-responsive col-md-12 col-sm-12" >
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">主机记录</th>
+                            <th class="column-title">记录类型</th>
+                            <th class="column-title">线路类型 </th>
+                            <th class="column-title">主机ip </th>
+                            <th class="column-title">TTL </th>
+                            <th class="column-title"> 域名状态 </th>
+                            <th class="column-title"> 操作 </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for k in records %}
+                          <tr>
+                            <td class="odd pointer"> {{k.host }} </td>
+                            <td class="odd pointer"> {{k.type }} </td>
+                            <td class="odd pointer"> {{k.linetype }} </td>
+                            <td class="odd pointer"> {{k.data }} </td>
+                            <td class="odd pointer"> {{k.ttl }} </td>
+                            {% set status = "启用" if k.status == 1 else "暂停"%}
+                            <td class="odd pointer"> {{ status }} </td>
+                            {% set url = "/dns/" ~ k.zone ~ "/s" ~ "?wd=" ~ k.host %}
+                            <td class="odd pointer"> <a href={{ url }}> 编辑 </a> </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+{% endblock %}
+{% block js %}
+    <script src="/static/js/search.js"></script>
+{% endblock %}

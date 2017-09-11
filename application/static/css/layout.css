@@ -1,0 +1,10 @@
+.title_right {
+    width: 80% !important;
+    float: left;
+    display: block;
+}
+.title_left {
+    width: 10% !important;
+    float: left;
+    display: block;
+}

@@ -1,0 +1,165 @@
+{% extends "layout.html" %}
+{% block page_content %}
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>
+                <span><a class="fa fa-home" href="/dns"></a><span>
+                <span id="domain" class="fa fa-angle-right"> {{ domain }} </span>
+                </h3>
+              </div>
+              <div class="title_right">
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="clearfix"></div>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel input-group">
+                    <button id="addrecord" name="addrecord" class="btn btn-primary">添加记录</button>
+                    <button class="btn btn-warn">暂停</button>
+                    <button class="btn btn-success">启用</button>
+                    <button id="deletes" data-toggle="modal" data-target="#conformmodel" class="btn btn-danger">删除</button>
+                    <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right top_search">
+                      <div class="input-group">
+                        <input id="searchtext" name="wd" type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                          <button id="search" class="btn btn-default" type="button">搜索</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="clearfix"></div>
+                  <div class="x_content">
+                    <form class="form-horizontal" data-parsley-excluded="input[type=hidden],select[type=hidden]">
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th>
+                              <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title"> 主机记录 </th>
+                            </th>
+                            <th class="column-title"> 记录类型 </th>
+                            </th>
+                            <th class="column-title"> 线路类型 </th>
+                            </th>
+                            <th class="column-title"> 解析地址 </th>
+                            </th>
+                            <th class="column-title"> TTL </th>
+                            </th>
+                            <th class="column-title"> 操作 </th>
+                            </th>
+                            <th class="bulk-actions" colspan="20">
+                              <a class="antoo" style="color:#fff; font-weight:500;">已选择 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                         {% for k in records%}
+                          <tr class="odd pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">
+                              <span name="host" >{{ k.host }}</span>
+                              <div class="form-group">
+                                <input name="host" type="text" class="form-control hidden" type="hidden" placeholder={{ k.host }} value={{ k.host }} data-parsley-required="true" data-parsley-required-message="不能为空" data-parsley-trigger="blur">
+                              </div>
+                            </td>
+                            <td class=" ">
+                              <span name="type">{{ k.type }}</span>
+                              <select name="type" class="form-control hidden" type="hidden">
+                                <option value="A">A</option>
+                                <option value="CNAME">CNAME</option>
+                                <option value="NX">NX</option>
+                                <option value="TXT">TXT</option>
+                                <option value="MX">MX</option>
+                                <option value="AAAA">AAAA</option>
+                                <option value="SRV">SRV</option>
+                              </select>
+                            </td>
+                            <td class=" ">
+                                {% if k.linetype == "cnc" %}
+                                  {% set linetype = "联通" %}
+                                {% elif k.linetype == "tel" %}
+                                  {% set linetype = "电信" %}
+                                {% elif k.linetype == "cm" %}
+                                  {% set linetype = "移动" %}
+                                {% elif k.linetype == "foriegn" %}
+                                  {% set linetype = "国外" %}
+                                {% else %}
+                                  {% set linetype = "其它" %}
+                                {% endif %}
+                              <span name="linetype">{{ linetype }}</span>
+                              <select name="linetype" class="form-control hidden" type="hidden">
+                                <option value="cnc">联通</option>
+                                <option value="tel">电信</option>
+                                <option value="cm">移动</option>
+                                <option value="foriegn">国外</option>
+                                <option value="other">其它</option>
+                              </select>
+                            </td>
+                            <td class=" ">
+                              <span name="data">{{ k.data }}</span>
+                              <div class="form-group">
+                                <input name="data" type="text" class="form-control hidden" type="hidden" placeholder={{ k.data }} value={{ k.data }} data-parsley-required="true" data-parsley-trigger="blur" data-parsley-patten="((25[0-5]|2[0-4]\d|[01]?\d\d?)($|(?!\.$)\.)){4}" data-parsley-patten-message="请输入合法ip地址" data-parsley-required-message="ip不能为空">
+                              </div>
+                            </td>
+                            <td class=" ">
+                              <span name="ttl">{{ k.ttl }}</span>
+                              <div class="form-group">
+                                <input name="ttl" type="text" class="form-control hidden" type="hidden" placeholder={{ k.ttl }} value={{ k.ttl }} data-parsley-required="true" data-parsley-trigger="blur" data-parsley-type="integer" data-parsley-error-message="请输入正确的时间" data-parsley-excluded="input[type=hidden]">
+                              </div>
+                            </td>
+                            <td class=" ">
+                                <a name="delete" data-toggle="modal" data-target="#conformmodel" href="javascript:void(0);">删除</a>
+                                {% set handler = "暂停" if k.status == 1 else "启用" %}
+                                <a href="javascript:void(0);">{{ handler }}</a>
+                              <div class="form-group">
+                                <button name="save" class="btn btn-primary subbmit hidden" type="hidden">保存</button>
+                                <p name="cancel" class="btn btn-default cancle hidden" type="hidden">取消</p>
+                              </div>
+                            </td>
+                          </tr>
+                         {% endfor %}
+                        </tbody>
+                      </table>
+                      </form>
+                    </div>
+                  </div>
+                  {% if pagination %}
+                  <div class="pull-right pagination">
+                    <span>
+                      <a href="/dns/{{ domain }}/1">
+                      <button class="btn btn-default">首页</button></a>
+                      {% if pagination.has_prev %}
+                         <a href="/dns/{{ domain }}/{{ pagination.prev_num }}">
+                           <button class="btn btn-default">上一页</button>
+                         </a>
+                      {% endif %}
+                      {% if pagination.has_next %}
+                        <a href="/dns/{{ domain }}/{{ pagination.next_num }}">
+                           <button class="btn btn-default">下一页</button>
+                        </a>
+                      {% endif %}
+                      <a href="/dns/{{ domain }}/{{ pagination.pages }}">
+                      <button class="btn btn-default">末页</button></a>
+                      <a href=""> 第{{ pagination.page }}页，共 {{ pagination.pages }}页</a>
+                    </span>
+                  </div> 
+                  {% endif %}
+                </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}
+{% block js %}
+<script src="/static/js/dns.js"></script>
+<script src="/static/js/parsley.js"></script>
+{% endblock %}

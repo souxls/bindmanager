@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+{% block page_content %}
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>用户管理</h3>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="clearfix"></div>
+             <div class="col-md-12 col-xs-12">
+                <div class="x_panel">
+                    <a href="/manager/add" target="_blank" class="btn btn-primary">添加用户</a>
+                    <button class="btn btn-warn">暂停</button>
+                    <button class="btn btn-success">启用</button>
+                    <button id="deletes" data-toggle="modal" data-target="#conformmodel" class="btn btn-danger">删除用户</button>
+                    <div class="col-md-4 col-sm-4 col-xs-12 form-group pull-right top_search">
+                      <div class="input-group">
+                        <input id="searchcontent" name="wd" type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">搜索</button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="x_content">
+                    <form class="cmxform">
+                    <div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th>
+                              <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title"> 登录名 </th>
+                            </th>
+                            <th class="column-title"> 用户名 </th>
+                            </th>
+                            <th class="column-title"> 用户邮箱 </th>
+                            </th>
+                            <th class="column-title"> 用户角色 </th>
+                            </th>
+                            <th class="column-title"> 状态 </th>
+                            </th>
+                            <th class="column-title">  操作 </th>
+                            </th>
+                            <th class="bulk-actions" colspan="20">
+                              <a class="antoo" style="color:#fff; font-weight:500;">已选择( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for k in users %}
+                          <tr class="odd pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">
+                              <span name="username" >{{ k.username }}</span>
+                            </td>
+                            <td class=" ">
+                              <span name="nickname">{{ k.nickname }}</span>
+                            </td>
+                            <td class=" ">
+                              <span name="identifier">{{ k.identifier }}</span>
+                            </td>
+                            <td class=" ">
+                              {% set auth = "超级管理员" if k.auth == 1 else "管理员" %}
+                              <span name="auth">{{ auth }}</span>
+                            </td>
+                            <td class=" ">
+                              {% set status = "启用" if k.status == 1 else "停用" %} 
+                              <span name="status">{{ status }}</span>
+                            </td>
+                           <td class=" ">
+                                <a href="/manager/add" target="_blank">编辑</a>
+                                <a href="#">禁用</a>
+                                <a name="delete" data-toggle="modal" data-target="#conformmodel" href="javascript:void(0);">删除</a>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}
+{% block js %}
+<script>
+  $(function(){
+    $("#searchcontent").keyup(function(){
+      var text = $("#searchcontent").val().trim();
+      $("table tbody tr")
+        .hide()
+        .filter(":contains('"+text+"')")
+        .show();
+    });
+  });
+</script>
+  <script src="/static/js/manager.js"></script>
+{% endblock %}

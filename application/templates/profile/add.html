@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+{% block page_content %}
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>
+                <span><a class="fa fa-home" href="/manager"></a><span>
+                <span id="domain" class="fa fa-angle-right"> 添加用户 </span>
+                </h3>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_content">
+                    <form class="form-horizontal form-label-left" data-parsley-validate="validate">
+                      <input id="pubkey" class="hidden" value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8QEybkn8CYcYYkUbVFLgtiHrVmnE1IRJm5hDdWbr9LAL6OogqlQ3YIZgUZWjHvHbeP9uU1koVrPYrAdV9Vm7eyoQM5wKv9mNpBb8NGXWyXL4dg3F5+3ZiVC9aTy7KOnBEHR9X2HMpq4K+mgXa55FibBp9e8nxoD9DMft3PUQLGQIDAQAB" type="hide">
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 用户名 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="username" class="form-control col-md-7 col-xs-12"  name="username" placeholder="用户名" type="text" data-parsley-required="true" data-parsley-length="[5, 30]" data-parsley-trigger="blur" data-parsley-length-message="请输入5-30位字母组合" data-parsley-required-message="请输入5-30位字母组合">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> 真实姓名 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="nickname" class="form-control col-md-7 col-xs-12"  name="nickname" placeholder="真实姓名" type="text" data-parsley-required="true" data-parsley-minlength="2" data-parsley-trigger="blur" data-parsley-minlength-message="请输入真实姓名" data-parsley-required-message="请输入真实姓名">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label for="password" class="control-label col-md-3"> 密码 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="password" type="password" name="password"  class="form-control col-md-7 col-xs-12" placeholder="请输入8-32位数字字母组合" data-validate-length="[8,32]"  data-parsley-length-message="请输入8-32位字母数字特殊符号组合"   data-parsley-required="true" data-parsley-length="[8, 32]" data-parsley-trigger="blur" data-parsley-trigger-after-failure="focusout"  data-parsley-required-message="请输入8-32位字母数字特殊符号组合">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label for="repeatpassword" class="control-label col-md-3 col-sm-3 col-xs-12">确认密码 <span class="required">*<span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="repeatpassword" type="password"  class="form-control col-md-7 col-xs-12"  placeholder="重复输入密码" data-parsley-required="true" data-parsley-length="[8, 32]"  data-parsley-length-message="请输入8-32位字母数字特殊符号组合" data-parsley-trigger="blur" data-parsley-required-message="请输入8-32位字母数字特殊符号组合" data-parsley-equalto="#password" data-parsley-equalto-message="两次密码输入不一致">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email"> 邮箱 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="email" id="email" name="email"  class="form-control col-md-7 col-xs-12" data-parsley-required="true" data-parsley-type="email"  data-parsley-trigger="blur" data-parsley-error-message="请输入正确的邮箱名">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="auth"> 用户角色 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <select name="auth" type="checkout" class="form-control">
+                            <option value="2"> 管理员 </option>
+                            <option value="1"> 超级管理员 </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="status"> 暂不启用</label>
+                        </label>
+                        <div class="col-md-1 col-sm-1 col-xs-1">
+                          <input id="status" name="status" type="checkbox" value="启用" class="form-control"></input>
+                        </div>
+                      </div>
+                      <p id=message class="text-danger text-center" type="hidden"></p>
+                      <div class="ln_solid"></div>
+                      <div class="item form-group">
+                        <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3">
+                          <button type="submit" class="btn btn-primary validate submit"> 添加 </button>
+                          <a href="/manager" class="btn btn-default"> 取消 </a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}
+{% block js %}
+  <script src="/static/js/jsencrypt.min.js"></script>
+  <script src="/static/js/formvalidation.js"></script>
+{% endblock %}

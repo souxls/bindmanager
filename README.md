@@ -42,3 +42,9 @@ nohup python runserver.py &>>access_log
 默认登录用户名和密码
 admin 0123456789
 ```
+
+## 功能概览
+
+![首页](https://user-images.githubusercontent.com/7885342/92895683-4cb86200-f44e-11ea-9fc5-83260b200ee2.png)
+![域名管理](https://user-images.githubusercontent.com/7885342/92895697-4fb35280-f44e-11ea-8d5d-535f6e47158a.png)
+![用户管理](https://user-images.githubusercontent.com/7885342/92895701-5215ac80-f44e-11ea-8ad2-20dff4f769b2.png)

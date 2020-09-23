@@ -40,7 +40,7 @@ nohup python runserver.py &>>access_log
 
 ```
 默认登录用户名和密码
-admin 0123456789
+admin 0123456
 ```
 
 ## 功能概览
